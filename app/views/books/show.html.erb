@@ -1,0 +1,8 @@
+<h2>Title</h2>
+<p><%= @book.title %></p>
+<h2>Body</h2>
+<p><%= @book.body %></p>
+<div>
+  <%= link_to "Edit", "/books/#{@book.id}/edit" %>
+  <%= link_to "Back", books_path %>
+</div>

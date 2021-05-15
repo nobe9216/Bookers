@@ -1,0 +1,60 @@
+
+    <h1>Books</h1>
+    <table>
+      <div class="table-head">
+        <div class="table-head-box">
+          <div class="table-head-contents1">
+            <h4>Title</h4>
+          </div>
+          <div class="table-head-contents2">
+            <h4>Body</h4>
+          </div>
+          <div class="table-head-contents3"></div>
+        </div>
+      </div>
+      <div class="table-body">
+        <div class="table-body-box">
+            <% @books.each do |book| %>
+          <div class="table-body-contents1">
+            <%= book.title %>
+          </div>
+          <div class="table-body-contents2">
+            <%= book.body %>
+          </div>
+          <div class="table-body-contents3">
+            <div class="show">
+              <%= link_to "Show", book_path(book.id) %>
+            </div>
+            <div class="edit">
+              <%= link_to "Edit", "/books/#{book.id}/edit" %>
+            </div>
+            <div class="destroy">
+              <%=link_to "Destroy", "/books/#{book.id}", method: :delete, data: {confirm: "Are you sure?"} %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </table>
+    <h2 class="form-title">New book</h2>
+    <% if @book.errors.any? %>
+      <%= @book.errors.count %>error prohibited this book from being saved:
+      <% @book.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    <% end %>
+
+    <%= form_with model:@book, local:true do |f| %>
+        <div>
+          <h4>Title</h4>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <h4>Body</h4>
+          <%= f.text_area :body %>
+        </div>
+        <div>
+          <%= f.submit 'Create Book' %>
+        </div>
+    <% end %>
+
